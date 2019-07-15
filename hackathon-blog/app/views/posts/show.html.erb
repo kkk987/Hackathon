@@ -1,10 +1,9 @@
-<h1>Blog</h1>
+<h1>Articles</h1>
+
 <div class="post">
-<% Post.order_by_time.each do |f|%>
+<% Post.ordered_by_user_and_time(current_user).each do |f|%>
 <p><%= f.title %></p>
 <p><%= f.description %></p>
 <p><%= User.find(f.user_id).username %></p>
 <% end %>
 </div>
-<p>post 2</p>
-<p>post 3</p>
