@@ -1,0 +1,9 @@
+<h1 class = "heading"><%= @post.title%></h1>
+
+<div class = "content">
+  <p><%= @post.description%></p>
+</div>
+<% if Post.find(params[:id]).user_id == current_user.id %>
+  <%= button_to "Delete", post_path(params[:id]), data: { confirm: "Are you sure?" }, method: :delete %>
+  <button class = "edit"><%= link_to "Edit", edit_post_path(id: params[:id])%></button>
+<% end %>

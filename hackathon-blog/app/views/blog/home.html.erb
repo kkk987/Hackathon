@@ -1,10 +1,11 @@
+
 <h1>Blog</h1>
-<div class="post">
 <% Post.order_by_time.each do |f|%>
-<p><%= f.title %></p>
-<p><%= f.description %></p>
-<p><%= User.find(f.user_id).username %></p>
+  <div class="post">
+    <p><%= link_to f.title, post_path(f.id)%></p>
+    <p><%= f.description %></p>
+    <p><%= User.find(f.user_id).username %></p>
+  </div>
 <% end %>
-</div>
 <p>post 2</p>
 <p>post 3</p>
