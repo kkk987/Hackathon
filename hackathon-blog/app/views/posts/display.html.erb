@@ -3,7 +3,32 @@
 <div class = "content">
   <p><%= @post.description%></p>
 </div>
-<% if Post.find(params[:id]).user_id == current_user.id %>
+<% if @post.user_id == current_user.id %>
   <%= button_to "Delete", post_path(params[:id]), data: { confirm: "Are you sure?" }, method: :delete %>
   <button class = "edit"><%= link_to "Edit", edit_post_path(id: params[:id])%></button>
+<% end %>
+
+<% if @post.comments.any? %>
+  <% Comment.sort_by_time(@post.id).each do |comment| %>
+    <div class = "comments" >
+      <p class="textfield"><%= User.find(comment.user_id).username %></p>
+      <p class="textfield"><%= comment.updated_at.to_date %></p>
+      <p class="textfield"><%= comment.comments %></p>
+    </div>
+    <% if comment.user_id == current_user.id%>
+      <%= button_to "Delete comment", delete_comment_path(comment.id), data: { confirm: "Are you sure?" }, method: :delete %>
+      <%= button_to "Edit comment", edit_comment_path(comment.id), method: :get %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%=form_with model: @comment do |f| %>
+  <p class="textfield">
+    <%= label(:comments, 'Comment') %>
+    <%= f.text_field :comments %>
+    <%= f.hidden_field :post_id %>
+  </p>
+  <p class="textfield">
+    <%= f.submit "Submit" %>
+  </p>
 <% end %>

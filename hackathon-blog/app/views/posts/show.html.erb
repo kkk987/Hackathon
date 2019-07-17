@@ -1,9 +1,18 @@
 <h1>Articles</h1>
-
-<% Post.ordered_by_user_and_time(current_user).each do |f|%>
+<h3>Past posts:</h3>
+<% @post.each do |f|%>
   <div class="post">
-    <p><%= link_to f.title, post_path(f.id) %></p>
-    <p><%= f.description %></p>
-    <p><%= User.find(f.user_id).username %></p>
+    <p class = "textfield"><%= link_to f.title, post_path(f.id) %></p>
+    <p class = "textfield"><%= f.description %></p>
+    <p class = "textfield"><%= User.find(f.user_id).username %></p>
+  </div>
+<% end %>
+
+<h3>Past comments:</h3>
+<% Comment.sort_by_user_and_time(current_user).each do |f| %>
+  <div class = "comment">
+    <p class = "textfield" >Comment to <%= link_to Post.find(f.post_id).title, post_path(f.post_id) %></p>
+    <p class = "textfield">Comment on <%= f.updated_at.to_date%></p>
+    <p class = "textfield"><%= f.comments %></p>
   </div>
 <% end %>

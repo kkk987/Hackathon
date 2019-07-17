@@ -15,11 +15,12 @@ class PostsController < ApplicationController
     end
 
     def show
-    
+        @post = Post.ordered_by_user_and_time(current_user)
     end
     
     def display
         @post = Post.find(params[:id])
+        @comment = Comment.new(post_id: params[:id])
     end
 
     def destroy

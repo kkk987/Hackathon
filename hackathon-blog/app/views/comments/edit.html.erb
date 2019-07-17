@@ -1,0 +1,5 @@
+<h1 class = "heading">Edit your comment</h1>
+<%=form_with model: @comment do |f| %>
+  <%= f.text_area :comments, size: "60x12" %>
+  <%= f.submit "Edit" %>
+<% end %>
