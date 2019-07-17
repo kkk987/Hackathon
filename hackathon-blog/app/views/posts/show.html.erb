@@ -1,10 +1,10 @@
-<h1>Articles</h1>
+<h1 class="article-heading">Articles</h1>
 <h3>Past posts:</h3>
 <% @post.each do |f|%>
   <div class="post">
-    <p class = "textfield"><%= link_to f.title, post_path(f.id) %></p>
-    <p class = "textfield"><%= f.description %></p>
-    <p class = "textfield"><%= User.find(f.user_id).username %></p>
+    <p class = "title"><%= link_to f.title, post_path(f.id) %></p>
+    <p class = "description"><%= f.description %></p>
+    <p class = "username"><%= User.find(f.user_id).username %></p>
   </div>
 <% end %>
 

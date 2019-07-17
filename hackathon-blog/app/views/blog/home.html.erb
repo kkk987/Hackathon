@@ -1,5 +1,5 @@
 
-<h1>Blog</h1>
+<h1 class="blog-heading">Blog</h1>
 <% Post.order_by_time.each do |f|%>
   <div class="post">
     <p><%= link_to f.title, post_path(f.id)%></p>
@@ -7,5 +7,5 @@
     <p><%= User.find(f.user_id).username %></p>
   </div>
 <% end %>
-<p>post 2</p>
-<p>post 3</p>
+
+

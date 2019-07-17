@@ -25,6 +25,12 @@ class PostsController < ApplicationController
 
     def destroy
         # post_id = params[:id]
+        comment = Comment.where("post_id = ?", params[:id])
+        if comment.any?
+            comment.each do |f|
+                f.destroy
+            end
+        end
         Post.find(params[:id]).destroy
         redirect_to posts_show_path
     end
